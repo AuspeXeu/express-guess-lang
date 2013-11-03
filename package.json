@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Provides the language accepted by the users browser in the request object",
   "main": "index.js",
+  "homepage": "https://github.com/AuspeXeu/express-guess-lang",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +21,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AuspeXeu/express-guess-lang/issues"
+  },
+  "engines": {
+    "node": ">=0.8.0"
   }
 }
