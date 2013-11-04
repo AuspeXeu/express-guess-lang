@@ -10,6 +10,8 @@ Simple express middleware that recognizes the region and languages of http clien
 
 ## Setup
 
+The init method takes an optional options object for further configuration.
+
     var express = require('express')
     var expressGuessLang = require('express-guess-lang')
     ...
@@ -20,7 +22,22 @@ Simple express middleware that recognizes the region and languages of http clien
     app.configure(function () {
         ...
 
-        app.use(expressGuessLang.init)
+        app.use(expressGuessLang.init())
+        app.use(app.router)
+        ...
+    })
+
+Layout of the optional options object.
+
+    var opts = {
+        defaultLanguage: 'de',
+        defaultRegion: 'DE'
+    }
+
+    app.configure(function () {
+        ...
+
+        app.use(expressGuessLang.init(opts))
         app.use(app.router)
         ...
     })
