@@ -27,7 +27,7 @@ The init method takes an optional options object for further configuration.
         ...
     })
 
-Layout of the optional options object.
+Layout of the optional options object. The default options come to use, when no localization information could be inferred.
 
     var opts = {
         defaultLanguage: 'de',
