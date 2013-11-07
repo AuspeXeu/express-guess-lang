@@ -1,6 +1,6 @@
 {
   "name": "express-guess-lang",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Provides the language accepted by the users browser in the request object",
   "main": "index.js",
   "homepage": "https://github.com/AuspeXeu/express-guess-lang",
