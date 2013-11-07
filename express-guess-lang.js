@@ -7,34 +7,33 @@ egl.init = function (opts) {
     return function (request, response, next) {
         var accept_lang = request.headers['accept-language'],
             regions = [],
-            langs = [],
-            likely = { lang: 'en', likelihood: 0.0}
+            languages = [],
+            lookup = {},
+            likely = { name: 'en', likelihood: 0.0 }
         if (typeof accept_lang === 'string') {
+            accept_lang = accept_lang.replace(/\s/g, '')
             var candidates = accept_lang.split(',')
             for (var i = 0; i < candidates.length; i++) {
-                var match = candidates[i].match(/q=([0-9].[0-9])/)
-                var likelihood = match ? match[1] : 0.0
-                match = candidates[i].match(/-([^;]*)/)
-                if (match)
-                    regions.push(match[1])
-                match = candidates[i].match(/(.*)[;||-]/)
-                var lang = match ? match[1] : ''
-                var newLang = { lang: lang, likelihood: likelihood }
+                var matches = candidates[i].match(/([^-;]*)(?:-([^;]*))?(?:;q=([0-9]\.[0-9]))?/)
+                if (matches[2])
+                    regions.push(matches[2])
+                var newLang = { name: matches[1], likelihood: matches[3] ? matches[3] : 1.0 }
+                languages.push(newLang)
+                lookup[newLang.name] = newLang.likelihood
                 if (newLang.likelihood > likely.likelihood)
                     likely = newLang
-                if (likelihood > 0.0)
-                    langs.push(newLang)
             }
-
-            request.getRegions = function () { return regions }
-            request.getLanguages = function () { return langs }
-            request.getLikelyLanguage = function () { return likely.lang }
         }
         else {
-            request.getRegions = function () { return [ defaultRegion ] }
-            request.getLanguages = function () { return [{ lang: defaultLang, likelihood: 0.0 }] }
-            request.getLikelyLanguage = function () { return defaultLang }
+            likely = { name: defaultLang, likelihood: 1.0 }
+            regions = [ defaultRegion ]
+            languages = [ likely ]
         }
+
+        request.getRegions = function () { return regions }
+        request.getLanguages = function () { return languages }
+        request.getLikelyLanguage = function () { return likely.name }
+        request.isAppropriate = function (name) { return (typeof lookup[name] !== 'undefined') }
 
         if (typeof next === 'function')
             next()
