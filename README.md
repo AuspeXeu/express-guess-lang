@@ -50,6 +50,7 @@ The request object is enriched with three functions to retrieve language and reg
         var languages = request.getLanguages()
         var regions = request.getRegions()
         var preferedLanguage = request.getLikelyLanguage()
+        var acceptable = request.isAppropriate('en')
     })
 
 ## Doc
@@ -68,6 +69,11 @@ Retrieve the prefered language of the user:
 
     getLikelyLanguage: string
     //Example: 'en'
+
+Check if a language is appropriate for the user:
+
+    isAppropriate('en'): boolean
+    //Example: true
 
 ## Licensed under MIT
 
