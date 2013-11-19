@@ -2,8 +2,8 @@
 
 Simple express middleware that recognizes the region and languages of http client requests.
 
-[![NPM](https://nodei.co/npm/express-guess-lang.png)](https://nodei.co/npm/express-guess-lang/)
-[![NPM version](https://badge.fury.io/js/express-guess-lang.png?downloads=true)](http://badge.fury.io/js/express-guess-lang)
+[![NPM](https://nodei.co/npm/express-guess-lang.png?downloads=true&stars=true)](https://nodei.co/npm/express-guess-lang/)
+[![NPM version](https://badge.fury.io/js/express-guess-lang.png)](http://badge.fury.io/js/express-guess-lang)
 
 ## Install
 
